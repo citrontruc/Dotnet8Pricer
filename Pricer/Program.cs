@@ -4,6 +4,7 @@ Main program of the api.
 
 using Microsoft.EntityFrameworkCore;
 using PricerApi.Data;
+using PricerApi.Log;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,12 @@ builder.Services.AddDbContext<PricerDbContext>(options =>
 );
 
 var app = builder.Build();
+
+// Exception handler should be FIRST because after logging, we fail.
+app.UseMiddleware<ExceptionLoggingMiddleware>();
+
+// Then request logging
+app.UseMiddleware<RequestLoggingMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
