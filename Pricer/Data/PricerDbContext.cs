@@ -5,11 +5,11 @@ A DbContext to access bond values
 using Microsoft.EntityFrameworkCore;
 using PricerApi.Models;
 
-namespace MusicDatabaseApi.Data;
+namespace PricerApi.Data;
 
-public class StockDbContext : DbContext
+public class PricerDbContext : DbContext
 {
-    public StockDbContext(DbContextOptions<StockDbContext> options)
+    public PricerDbContext(DbContextOptions<PricerDbContext> options)
         : base(options) { }
 
     public DbSet<Stock> Stocks { get; set; }
