@@ -3,14 +3,19 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.23">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageVersion>
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.23" />
+    <PackageVersion Include="Serilog" Version="4.3.0" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="10.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.18.0.131500" />
     <PackageVersion Include="Meziantou.Analyzer" Version="2.0.286" />
     <PackageVersion Include="Roslynator.Analyzers" Version="4.15.0" />
-
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.123" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.23" />
     <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.22" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
     <PackageVersion Include="xunit" Version="2.4.2" />
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5">
