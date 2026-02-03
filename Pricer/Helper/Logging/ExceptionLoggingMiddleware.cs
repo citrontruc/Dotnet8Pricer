@@ -2,8 +2,6 @@
 Middleware to log all exceptions before throwing them.
 */
 
-using PricerApi.Log;
-
 namespace PricerApi.Log;
 
 public class ExceptionLoggingMiddleware : ILoggerMiddleware

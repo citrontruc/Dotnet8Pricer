@@ -4,7 +4,7 @@ A child of the list method to handle data with pagination.
 
 using Microsoft.EntityFrameworkCore;
 
-namespace ListPagination
+namespace Pagination
 {
     public class PagedList<T> : List<T>
     {

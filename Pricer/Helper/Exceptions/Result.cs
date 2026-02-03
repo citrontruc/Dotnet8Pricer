@@ -2,8 +2,6 @@
 A file to implement the result pattern in order to check if a request was successful.
 */
 
-using ResultValues;
-
 namespace ResultValues;
 
 public record class Result

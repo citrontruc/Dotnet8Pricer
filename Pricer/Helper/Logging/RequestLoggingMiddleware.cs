@@ -2,8 +2,6 @@
 Middleware to log all incoming calls as information.
 */
 
-using PricerApi.Log;
-
 namespace PricerApi.Log;
 
 public class RequestLoggingMiddleware : ILoggerMiddleware
