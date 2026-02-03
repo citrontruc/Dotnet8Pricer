@@ -15,7 +15,7 @@ namespace ListPagination
         public bool HasPrevious => CurrentPage > 1;
         public bool HasNext => CurrentPage < TotalPages;
 
-        public PagedList(List<T> items, int count, int pageSize, int pageNumber)
+        public PagedList(IEnumerable<T> items, int pageSize, int pageNumber, int count)
         {
             TotalCount = count;
             PageSize = pageSize;
@@ -29,14 +29,7 @@ namespace ListPagination
         {
             var count = source.Count();
             var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-            return new PagedList<T>(items, count, pageNumber, pageSize);
-        }
-
-        public static PagedList<T> ToPagedList(List<T> source, int pageSize, int pageNumber)
-        {
-            var count = source.Count;
-            var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
-            return new PagedList<T>(items, count, pageNumber, pageSize);
+            return new PagedList<T>(items, pageSize, pageNumber, count);
         }
 
         public static async Task<PagedList<T>> ToPagedListAsync(
@@ -47,7 +40,7 @@ namespace ListPagination
         {
             var count = await source.CountAsync();
             var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PagedList<T>(items, count, pageNumber, pageSize);
+            return new PagedList<T>(items, pageSize, pageNumber, count);
         }
         #endregion
     }
