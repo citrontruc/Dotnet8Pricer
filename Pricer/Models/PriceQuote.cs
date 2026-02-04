@@ -4,7 +4,7 @@ A model to create quotations for our company.
 
 namespace PricerApi.Models;
 
-public class PriceQuote
+public record class PriceQuote
 {
     public int Id { get; set; }
     public string Symbol { get; set; } = string.Empty;

@@ -4,7 +4,7 @@ A model to present Stock values.
 
 namespace PricerApi.Models;
 
-public class Stock
+public record class Stock
 {
     public int Id { get; set; }
     public string Symbol { get; set; } = string.Empty;

@@ -4,7 +4,7 @@ A model to create trade requests.
 
 namespace PricerApi.Models;
 
-public class Trade
+public record class Trade
 {
     public int Id { get; set; }
     public string Symbol { get; set; } = string.Empty;
