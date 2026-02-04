@@ -11,61 +11,67 @@ namespace Pricer.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "DayHigh",
-                table: "Stocks");
+            migrationBuilder.DropColumn(name: "DayHigh", table: "Stocks");
 
-            migrationBuilder.DropColumn(
-                name: "DayLow",
-                table: "Stocks");
+            migrationBuilder.DropColumn(name: "DayLow", table: "Stocks");
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "Id",
-                table: "Trades",
-                type: "TEXT",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "INTEGER")
+            migrationBuilder
+                .AlterColumn<Guid>(
+                    name: "Id",
+                    table: "Trades",
+                    type: "TEXT",
+                    nullable: false,
+                    oldClrType: typeof(int),
+                    oldType: "INTEGER"
+                )
                 .OldAnnotation("Sqlite:Autoincrement", true);
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "Id",
-                table: "Stocks",
-                type: "TEXT",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "INTEGER")
+            migrationBuilder
+                .AlterColumn<Guid>(
+                    name: "Id",
+                    table: "Stocks",
+                    type: "TEXT",
+                    nullable: false,
+                    oldClrType: typeof(int),
+                    oldType: "INTEGER"
+                )
                 .OldAnnotation("Sqlite:Autoincrement", true);
 
-            migrationBuilder.AlterColumn<Guid>(
-                name: "Id",
-                table: "PriceQuotes",
-                type: "TEXT",
-                nullable: false,
-                oldClrType: typeof(int),
-                oldType: "INTEGER")
+            migrationBuilder
+                .AlterColumn<Guid>(
+                    name: "Id",
+                    table: "PriceQuotes",
+                    type: "TEXT",
+                    nullable: false,
+                    oldClrType: typeof(int),
+                    oldType: "INTEGER"
+                )
                 .OldAnnotation("Sqlite:Autoincrement", true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "Trades",
-                type: "INTEGER",
-                nullable: false,
-                oldClrType: typeof(Guid),
-                oldType: "TEXT")
+            migrationBuilder
+                .AlterColumn<int>(
+                    name: "Id",
+                    table: "Trades",
+                    type: "INTEGER",
+                    nullable: false,
+                    oldClrType: typeof(Guid),
+                    oldType: "TEXT"
+                )
                 .Annotation("Sqlite:Autoincrement", true);
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "Stocks",
-                type: "INTEGER",
-                nullable: false,
-                oldClrType: typeof(Guid),
-                oldType: "TEXT")
+            migrationBuilder
+                .AlterColumn<int>(
+                    name: "Id",
+                    table: "Stocks",
+                    type: "INTEGER",
+                    nullable: false,
+                    oldClrType: typeof(Guid),
+                    oldType: "TEXT"
+                )
                 .Annotation("Sqlite:Autoincrement", true);
 
             migrationBuilder.AddColumn<decimal>(
@@ -73,22 +79,26 @@ namespace Pricer.Migrations
                 table: "Stocks",
                 type: "TEXT",
                 nullable: false,
-                defaultValue: 0m);
+                defaultValue: 0m
+            );
 
             migrationBuilder.AddColumn<decimal>(
                 name: "DayLow",
                 table: "Stocks",
                 type: "TEXT",
                 nullable: false,
-                defaultValue: 0m);
+                defaultValue: 0m
+            );
 
-            migrationBuilder.AlterColumn<int>(
-                name: "Id",
-                table: "PriceQuotes",
-                type: "INTEGER",
-                nullable: false,
-                oldClrType: typeof(Guid),
-                oldType: "TEXT")
+            migrationBuilder
+                .AlterColumn<int>(
+                    name: "Id",
+                    table: "PriceQuotes",
+                    type: "INTEGER",
+                    nullable: false,
+                    oldClrType: typeof(Guid),
+                    oldType: "TEXT"
+                )
                 .Annotation("Sqlite:Autoincrement", true);
         }
     }

@@ -33,7 +33,10 @@ public class SqlStockRepository : IStockRepository
         return Result.Success();
     }
 
-    public async Task<Stock?> GetStockRequestById(PricerDbContext dbContext, GetStockRequest stockRequests)
+    public async Task<Stock?> GetStockRequestById(
+        PricerDbContext dbContext,
+        GetStockRequest stockRequests
+    )
     {
         return await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == stockRequests.Id);
     }
@@ -43,13 +46,18 @@ public class SqlStockRepository : IStockRepository
         return null;
     }
 
-    public async Task<Stock?> DeleteStockRequest(PricerDbContext dbContext, DeleteStockRequest stockRequests)
+    public async Task<Stock?> DeleteStockRequest(
+        PricerDbContext dbContext,
+        DeleteStockRequest stockRequests
+    )
     {
         int success = 0;
         Stock? stock = await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == stockRequests.Id);
         if (stock != null)
         {
-            success = await dbContext.Stocks.Where(a => a.Id == stockRequests.Id).ExecuteDeleteAsync();
+            success = await dbContext
+                .Stocks.Where(a => a.Id == stockRequests.Id)
+                .ExecuteDeleteAsync();
         }
         if (success == 1)
         {
