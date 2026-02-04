@@ -23,5 +23,9 @@ public interface IStockRepository
         PricerDbContext dbContext,
         GetStockRequest stockRequests
     );
-    public Task<Stock?> GetAll(PricerDbContext dbContext);
+    public Task<IEnumerable<Stock?>> GetAll(
+        PricerDbContext dbContext,
+        int? pageSize,
+        int? pageNumber
+    );
 }
