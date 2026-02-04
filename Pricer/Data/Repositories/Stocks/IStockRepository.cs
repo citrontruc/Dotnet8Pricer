@@ -15,15 +15,7 @@ public interface IStockRepository
         CreateStockRequest stockRequests
     );
 
-    public Task<Stock?> DeleteStockRequest(
-        PricerDbContext dbContext,
-        DeleteStockRequest stockRequests
-    );
-
-    public Task<Stock?> GetStockRequestById(
-        PricerDbContext dbContext,
-        GetStockRequest stockRequests
-    );
+    public Task<Stock?> DeleteStockRequest(PricerDbContext dbContext, Guid id);
 
     public Task<Stock?> GetStockRequestById(PricerDbContext dbContext, Guid id);
 

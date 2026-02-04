@@ -3,8 +3,11 @@ Main program of the api.
 */
 
 using Microsoft.EntityFrameworkCore;
+using Pagination;
 using PricerApi.Data;
+using PricerApi.Endpoints;
 using PricerApi.Log;
+using PricerApi.StockRepository;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,9 +22,11 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 // Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IStockRepository, SqlStockRepository>();
+builder.Services.AddSingleton<PaginationParameters, PaginationParameters>();
 builder.Services.AddDbContext<PricerDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
@@ -34,6 +39,10 @@ app.UseMiddleware<ExceptionLoggingMiddleware>();
 // Then request logging
 app.UseMiddleware<RequestLoggingMiddleware>();
 
+// Register endpoints
+RouteGroupBuilder versionGroup = app.MapGroup("api/");
+versionGroup.MapStockEndpoints();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -42,6 +51,13 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+// Handle Migrations
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<PricerDbContext>();
+    await context.Database.MigrateAsync();
+}
 
 #region Run application
 

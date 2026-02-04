@@ -68,18 +68,13 @@ public class SqlStockRepository : IStockRepository
         );
     }
 
-    public async Task<Stock?> DeleteStockRequest(
-        PricerDbContext dbContext,
-        DeleteStockRequest stockRequests
-    )
+    public async Task<Stock?> DeleteStockRequest(PricerDbContext dbContext, Guid id)
     {
         int success = 0;
-        Stock? stock = await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == stockRequests.Id);
+        Stock? stock = await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == id);
         if (stock != null)
         {
-            success = await dbContext
-                .Stocks.Where(a => a.Id == stockRequests.Id)
-                .ExecuteDeleteAsync();
+            success = await dbContext.Stocks.Where(a => a.Id == id).ExecuteDeleteAsync();
         }
         if (success == 1)
         {

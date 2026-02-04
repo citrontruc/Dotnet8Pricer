@@ -17,7 +17,7 @@ public static class StockEndpoint
     /// Extension of the app in order to add endpoints to retrieve albums
     /// </summary>
     /// <param name="app">The api to add endpoints to</param>
-    public static void MapAlbumEndpoints(this IEndpointRouteBuilder app)
+    public static void MapStockEndpoints(this IEndpointRouteBuilder app)
     {
         var stockGroup = app.MapGroup("/stocks");
         stockGroup
@@ -27,14 +27,16 @@ public static class StockEndpoint
 
         stockGroup.MapGet("/", GetStock).WithName("GetStocks").WithSummary("Get all stocks");
 
-        app.MapGet("/{id:guid?}", GetStockById)
+        stockGroup
+            .MapGet("/{id:guid}", GetStockById)
             .WithName("GetStocksById")
             .WithSummary("Get a specific stock by ID")
             .WithDescription(
                 "Queries the stock with the corresponding id from the database and retrieves its information."
             );
 
-        app.MapDelete("/{id:guid}", DeleteAlbum)
+        stockGroup
+            .MapDelete("/{id:guid}", DeleteAlbum)
             .WithName("Delete Stock")
             .WithSummary("Delete a stock given its ID.");
     }
@@ -64,27 +66,20 @@ public static class StockEndpoint
     private static async Task<IResult> GetStockById(
         PricerDbContext db,
         IStockRepository repo,
-        Guid? id,
-        [FromBody] GetStockRequest? getRequest = null
+        [FromQuery] Guid id
     )
     {
-        Stock? stock;
-        if (id.HasValue)
-        {
-            stock = await repo.GetStockRequestById(db, id.Value);
-            return stock is null ? Results.NotFound() : Results.Ok(stock);
-        }
-        stock = await repo.GetStockRequestById(db, getRequest);
+        Stock? stock = await repo.GetStockRequestById(db, id);
         return stock is null ? Results.NotFound() : Results.Ok(stock);
     }
 
     private static async Task<IResult> DeleteAlbum(
         PricerDbContext db,
         IStockRepository repo,
-        DeleteStockRequest deleteRequest
+        Guid id
     )
     {
-        Stock? stock = await repo.DeleteStockRequest(db, deleteRequest);
+        Stock? stock = await repo.DeleteStockRequest(db, id);
         return stock is null ? Results.NotFound() : Results.Ok(stock);
     }
     #endregion
