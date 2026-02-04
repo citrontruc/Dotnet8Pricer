@@ -7,7 +7,6 @@ using Pagination;
 using PricerApi.Data;
 using PricerApi.Models;
 using PricerApi.StockRequests;
-using ResultValues;
 
 namespace PricerApi.StockRepository;
 
@@ -15,7 +14,7 @@ public class SqlStockRepository : IStockRepository
 {
     private readonly PaginationParameters _defaultPaginationParameters = new();
 
-    public async Task<Result> CreateStockRequest(
+    public async Task<Stock> CreateStockRequest(
         PricerDbContext dbContext,
         CreateStockRequest stockRequests
     )
@@ -33,7 +32,12 @@ public class SqlStockRepository : IStockRepository
         await dbContext.AddAsync(stock);
         await dbContext.SaveChangesAsync();
 
-        return Result.Success();
+        return stock;
+    }
+
+    public async Task<Stock?> GetStockRequestById(PricerDbContext dbContext, Guid id)
+    {
+        return await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task<Stock?> GetStockRequestById(
@@ -41,7 +45,7 @@ public class SqlStockRepository : IStockRepository
         GetStockRequest stockRequests
     )
     {
-        return await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == stockRequests.Id);
+        return await GetStockRequestById(dbContext, stockRequests.Id);
     }
 
     public async Task<IEnumerable<Stock?>> GetAll(
