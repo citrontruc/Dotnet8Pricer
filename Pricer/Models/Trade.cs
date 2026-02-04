@@ -6,7 +6,7 @@ namespace PricerApi.Models;
 
 public record class Trade
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Symbol { get; set; } = string.Empty;
     public TradeType Type { get; set; }
     public decimal Price { get; set; }

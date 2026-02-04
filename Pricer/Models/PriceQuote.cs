@@ -6,7 +6,7 @@ namespace PricerApi.Models;
 
 public record class PriceQuote
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
     public string Symbol { get; set; } = string.Empty;
     public decimal BidPrice { get; set; }
     public decimal AskPrice { get; set; }

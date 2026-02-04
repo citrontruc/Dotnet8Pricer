@@ -10,10 +10,14 @@ public record class CreateStockRequest
     public string CompanyName { get; set; } = string.Empty;
     public decimal Price { get; set; }
     public long Volume { get; set; }
-    public bool IsDeleted { get; set; }
 }
 
 public record class DeleteStockRequest
+{
+    public int Id { get; set; }
+}
+
+public record class GetStockRequest
 {
     public int Id { get; set; }
 }
