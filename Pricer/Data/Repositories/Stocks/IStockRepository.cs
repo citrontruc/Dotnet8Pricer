@@ -3,6 +3,7 @@ An interface to define allowed methods in the stocks database.
 */
 
 using PricerApi.Data;
+using PricerApi.Models;
 using PricerApi.StockRequests;
 using ResultValues;
 
@@ -14,7 +15,7 @@ public interface IStockRepository
         PricerDbContext dbContext,
         CreateStockRequest stockRequests
     );
-    public void DeleteStockRequest(PricerDbContext dbContext, DeleteStockRequest stockRequests);
-    public void GetStockRequestById(PricerDbContext dbContext, GetStockRequest stockRequests);
-    public void GetAll(PricerDbContext dbContext);
+    public Task<Stock?> DeleteStockRequest(PricerDbContext dbContext, DeleteStockRequest stockRequests);
+    public Task<Stock?> GetStockRequestById(PricerDbContext dbContext, GetStockRequest stockRequests);
+    public Task<Stock?> GetAll(PricerDbContext dbContext);
 }

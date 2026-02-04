@@ -14,10 +14,10 @@ public record class CreateStockRequest
 
 public record class DeleteStockRequest
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 }
 
 public record class GetStockRequest
 {
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 }

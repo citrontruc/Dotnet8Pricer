@@ -2,6 +2,7 @@
 A class to define the SQL database operations defined in the IStockRepository interface.
 */
 
+using Microsoft.EntityFrameworkCore;
 using PricerApi.Data;
 using PricerApi.Models;
 using PricerApi.StockRequests;
@@ -32,9 +33,28 @@ public class SqlStockRepository : IStockRepository
         return Result.Success();
     }
 
-    public void DeleteStockRequest(PricerDbContext dbContext, DeleteStockRequest stockRequests) { }
+    public async Task<Stock?> GetStockRequestById(PricerDbContext dbContext, GetStockRequest stockRequests)
+    {
+        return await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == stockRequests.Id);
+    }
 
-    public void GetStockRequestById(PricerDbContext dbContext, GetStockRequest stockRequests) { }
+    public async Task<Stock?> GetAll(PricerDbContext dbContext)
+    {
+        return null;
+    }
 
-    public void GetAll(PricerDbContext dbContext) { }
+    public async Task<Stock?> DeleteStockRequest(PricerDbContext dbContext, DeleteStockRequest stockRequests)
+    {
+        int success = 0;
+        Stock? stock = await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == stockRequests.Id);
+        if (stock != null)
+        {
+            success = await dbContext.Stocks.Where(a => a.Id == stockRequests.Id).ExecuteDeleteAsync();
+        }
+        if (success == 1)
+        {
+            return stock;
+        }
+        return null;
+    }
 }
