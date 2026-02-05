@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Pagination;
 using PricerApi.Data;
 using PricerApi.Endpoints;
-using PricerApi.Log;
+using ApiServices.Logging;
 using PricerApi.StockRepository;
 using Serilog;
 

@@ -2,7 +2,7 @@
 A class to implement the Result design pattern.
 */
 
-namespace ResultValues;
+namespace ApiServices.Results;
 
 public sealed record Error(string Code, string Description)
 {

@@ -10,7 +10,7 @@ using PricerApi.StockRequests;
 
 namespace PricerApi.Endpoints;
 
-public static class StockEndpoint
+internal static class StockEndpoint
 {
     #region Create Endpoints
     /// <summary>

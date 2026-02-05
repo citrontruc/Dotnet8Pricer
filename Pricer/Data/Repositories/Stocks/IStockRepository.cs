@@ -8,7 +8,7 @@ using PricerApi.StockRequests;
 
 namespace PricerApi.StockRepository;
 
-public interface IStockRepository
+internal interface IStockRepository
 {
     public Task<Stock> CreateStockRequest(
         PricerDbContext dbContext,

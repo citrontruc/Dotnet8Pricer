@@ -4,13 +4,14 @@ A class to define the SQL database operations defined in the IStockRepository in
 
 using Microsoft.EntityFrameworkCore;
 using Pagination;
+using ApiServices.Pagination;
 using PricerApi.Data;
 using PricerApi.Models;
 using PricerApi.StockRequests;
 
 namespace PricerApi.StockRepository;
 
-public class SqlStockRepository : IStockRepository
+internal class SqlStockRepository : IStockRepository
 {
     private readonly PaginationParameters _defaultPaginationParameters = new();
 
@@ -38,14 +39,6 @@ public class SqlStockRepository : IStockRepository
     public async Task<Stock?> GetStockRequestById(PricerDbContext dbContext, Guid id)
     {
         return await dbContext.Stocks.FirstOrDefaultAsync(a => a.Id == id);
-    }
-
-    public async Task<Stock?> GetStockRequestById(
-        PricerDbContext dbContext,
-        GetStockRequest stockRequests
-    )
-    {
-        return await GetStockRequestById(dbContext, stockRequests.Id);
     }
 
     public async Task<IEnumerable<Stock?>> GetAll(

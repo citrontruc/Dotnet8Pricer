@@ -2,7 +2,10 @@
 Middleware to log all exceptions before throwing them.
 */
 
-namespace PricerApi.Log;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+
+namespace ApiServices.Logging;
 
 public class ExceptionLoggingMiddleware : ILoggerMiddleware
 {

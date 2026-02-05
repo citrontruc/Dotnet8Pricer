@@ -1,10 +1,9 @@
 /*
 A child of the list method to handle data with pagination.
 */
-
 using Microsoft.EntityFrameworkCore;
 
-namespace Pagination
+namespace ApiServices.Pagination
 {
     public class PagedList<T> : List<T>
     {

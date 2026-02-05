@@ -2,7 +2,9 @@
 A simple interface to invoke a logging middleware.
 */
 
-namespace PricerApi.Log;
+using Microsoft.AspNetCore.Http;
+
+namespace ApiServices.Logging;
 
 public interface ILoggerMiddleware
 {

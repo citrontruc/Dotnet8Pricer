@@ -2,7 +2,7 @@
 A file to implement the result pattern in order to check if a request was successful.
 */
 
-namespace ResultValues;
+namespace ApiServices.Results;
 
 public record class Result
 {

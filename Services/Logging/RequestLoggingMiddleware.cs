@@ -2,7 +2,10 @@
 Middleware to log all incoming calls as information.
 */
 
-namespace PricerApi.Log;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
+
+namespace ApiServices.Logging;
 
 public class RequestLoggingMiddleware : ILoggerMiddleware
 {
