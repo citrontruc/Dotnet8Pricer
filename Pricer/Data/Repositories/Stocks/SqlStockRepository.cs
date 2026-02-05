@@ -3,6 +3,7 @@ A class to define the SQL database operations defined in the IStockRepository in
 */
 
 using ApiServices.Pagination;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Pagination;
 using PricerApi.Data;
@@ -14,12 +15,21 @@ namespace PricerApi.StockRepository;
 internal class SqlStockRepository : IStockRepository
 {
     private readonly PaginationParameters _defaultPaginationParameters = new();
+    private IMapper _automapper;
+
+    public SqlStockRepository(IMapper mapper)
+    {
+        // Automapper only maps fields with an exact correspondance.
+        _automapper = mapper;
+    }
 
     public async Task<Stock> CreateStockRequest(
         PricerDbContext dbContext,
         CreateStockRequest stockRequests
     )
     {
+        Stock stockMapper = _automapper.Map<Stock>(stockRequests);
+        /*
         Stock stock = new Stock
         {
             Id = Guid.NewGuid(),
@@ -30,10 +40,11 @@ internal class SqlStockRepository : IStockRepository
             Volume = stockRequests.Volume,
             IsDeleted = false,
         };
-        await dbContext.AddAsync(stock);
+        */
+        await dbContext.AddAsync(stockMapper);
         await dbContext.SaveChangesAsync();
 
-        return stock;
+        return stockMapper;
     }
 
     public async Task<Stock?> GetStockRequestById(PricerDbContext dbContext, Guid id)

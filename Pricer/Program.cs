@@ -2,12 +2,17 @@
 Main program of the api.
 */
 
+using ApiServices.Extension;
 using ApiServices.Logging;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging.Abstractions; // Necessary for NullLoggerFactory.Instance
 using Pagination;
 using PricerApi.Data;
 using PricerApi.Endpoints;
+using PricerApi.Models;
 using PricerApi.StockRepository;
+using PricerApi.StockRequests;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +29,13 @@ builder.Host.UseSerilog();
 // Add services to the container.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Add Automapper before adding new services or else there could be conflicts.
+var config = new MapperConfiguration(
+    cfg => cfg.CreateMap<CreateStockRequest, Stock>(),
+    NullLoggerFactory.Instance
+);
+builder.Services.AddAutoMapper(config);
 
 builder.Services.AddScoped<IStockRepository, SqlStockRepository>();
 builder.Services.AddSingleton<PaginationParameters, PaginationParameters>();

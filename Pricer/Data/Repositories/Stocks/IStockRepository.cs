@@ -2,6 +2,7 @@
 An interface to define allowed methods in the stocks database.
 */
 
+using AutoMapper;
 using PricerApi.Data;
 using PricerApi.Models;
 using PricerApi.StockRequests;
