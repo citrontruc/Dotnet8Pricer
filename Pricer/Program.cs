@@ -2,11 +2,11 @@
 Main program of the api.
 */
 
+using ApiServices.Logging;
 using Microsoft.EntityFrameworkCore;
 using Pagination;
 using PricerApi.Data;
 using PricerApi.Endpoints;
-using ApiServices.Logging;
 using PricerApi.StockRepository;
 using Serilog;
 

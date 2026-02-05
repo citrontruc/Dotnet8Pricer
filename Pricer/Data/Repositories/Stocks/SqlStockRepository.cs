@@ -2,9 +2,9 @@
 A class to define the SQL database operations defined in the IStockRepository interface.
 */
 
+using ApiServices.Pagination;
 using Microsoft.EntityFrameworkCore;
 using Pagination;
-using ApiServices.Pagination;
 using PricerApi.Data;
 using PricerApi.Models;
 using PricerApi.StockRequests;
